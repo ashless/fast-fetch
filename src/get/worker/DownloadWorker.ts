@@ -26,15 +26,9 @@ export class DownloadWorker {
       },
       signal
     })
-
-    // if (!response.ok) {
-    //   controller.abort()
-    //   throw new Error(`Failed to download at range ${range[0]}-${range[1]}`)
-    // }
-
-    if (response.status !== 206) {
+    if (!response.ok) {
       controller.abort()
-      throw new Error(`HTTP status not 206 at range ${range[0]}-${range[1]}`)
+      throw new Error(`Failed to download at range  ${range[0]}-${range[1]}`)
     }
 
     const blob = await response.blob()
